@@ -1,0 +1,14 @@
+def getQuaterback(string):
+    return 0;
+def getRunningBacks(string):
+    return 0;
+def getOffensiveLine(string):
+     return 0;   
+def getWideRecievers(string):
+    return 0;
+def getRunDefense(string):
+    return 0;
+def getPassDefense(string):
+    return 0;
+def getStrengthOfTeam(list):
+    return 0;    
