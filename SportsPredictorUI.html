@@ -15,7 +15,14 @@
 <body>
   <script src="js/scripts.js"></script>
   <h1><u>Sports Predictor</u></h1>
+  <p style="text-align:right;">
+  <button type="button">Baseball</button>
+  <button type="button">Hockey</button>
+  <button type="button">Basketball</button>
+  <button type="button">Football</button>
+  </p>
   <div class="row">
+    
     <div class="column">
       <h2><u>AFC Teams</u></h2>
       <ul style="list-style: none;">
@@ -28,8 +35,10 @@
     <div class="column">
       <div class="row1">
         <div class="column1">
+          <p style="text-align:left;">
           <h2>Select Team 1</h2>
           <select></select>
+          </p>
         </div>
         <div class="column1">
           <label>Home</label>
@@ -37,8 +46,10 @@
         </div>
         </div>
         <div class="column1">
+          <p style="text-align:right;">
           <h2>Select Team 2</h2>
           <select></select>
+          </p>
         </div>
       </div>
     </div>
@@ -52,5 +63,11 @@
       </ul>
     </div>
   </div>
+  <div style="position: relative">
+    <p style="position: fixed; bottom: 0; width:100%; text-align: center">
+      <button type="button">Submit</button>
+      <button type="button">Reset</button>
+    </p>
+</div>
 </body>
 </html>
