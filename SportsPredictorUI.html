@@ -4,8 +4,8 @@
 <head>
   <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
-  <meta name="description" content="The HTML5 Herald">
+  <title>Sports Predictor</title>
+  <meta name="description" content="Sports Predictor">
   <meta name="author" content="SitePoint">
 
   <link rel="stylesheet" href="css/styles.css?v=1.0">
@@ -14,5 +14,60 @@
 
 <body>
   <script src="js/scripts.js"></script>
+  <h1><u>Sports Predictor</u></h1>
+  <p style="text-align:right;">
+  <button type="button">Baseball</button>
+  <button type="button">Hockey</button>
+  <button type="button">Basketball</button>
+  <button type="button">Football</button>
+  </p>
+  <div class="row">
+    
+    <div class="column">
+      <h2><u>AFC Teams</u></h2>
+      <ul style="list-style: none;">
+        <li><u>North</u></li>
+        <li><u>South</u></li>
+        <li><u>East</u></li>
+        <li><u>West</u></li>
+      </ul>
+    </div>
+    <div class="column">
+      <div class="row1">
+        <div class="column1">
+          <p style="text-align:left;">
+          <h2>Select Team 1</h2>
+          <select></select>
+          </p>
+        </div>
+        <div class="column1">
+          <label>Home</label>
+          <label>Away</label>
+        </div>
+        </div>
+        <div class="column1">
+          <p style="text-align:right;">
+          <h2>Select Team 2</h2>
+          <select></select>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="column">
+      <h2><u>NFC Teams</u></h2>
+      <ul style="list-style: none;">
+        <li><u>North</u></li>
+        <li><u>South</u></li>
+        <li><u>East</u></li>
+        <li><u>West</u></li>
+      </ul>
+    </div>
+  </div>
+  <div style="position: relative">
+    <p style="position: fixed; bottom: 0; width:100%; text-align: center">
+      <button type="button">Submit</button>
+      <button type="button">Reset</button>
+    </p>
+</div>
 </body>
 </html>
