@@ -2,44 +2,49 @@ import pyodbc;
 def getQuaterback(team):
     #get the quaterback's overall and return it
     overall = pullFromDatabase(team, 'QB', '1')
-    print(overall)
     return overall
 def getRunningBacks(team):
     overall = pullFromDatabase(team, 'HB', '2')
-    print(overall)
     return overall;
 def getOffensiveLine(team):
-    overall = pullFromDatabase(team, 'WR')
-    print(overall)
-    return overall
+    overallRG = pullFromDatabase(team, 'RG', '1')
+    overallRT = pullFromDatabase(team, 'RT', '1')
+    overallC = pullFromDatabase(team, 'C', '1')
+    overallLT = pullFromDatabase(team, 'LT', '1')
+    overallLG = pullFromDatabase(team, 'LG', '1')
+    overall = overallRG + overallRT + overallC + overallLT + overallLG
+    return overall/5
 def getWideRecievers(team):
-    overall = pullFromDatabase(team, 'WR', 3) + pullFromDatabase(team, 'TE', 2)
+    overall = pullFromDatabase(team, 'WR', '3') + pullFromDatabase(team, 'TE', '2')
     return overall/2
 def getRunDefense(team):
-    overallMLB = pullFromDatabase(team,'MLB')
-    overallROLB = pullFromDatabase(team,'ROLB')
-    overallLOLB = pullFromDatabase(team,'LOLB')
-    overallRE = pullFromDatabase(team,'RE')
-    overallLE = pullFromDatabase(team,'LE')
-    overallDT = pullFromDatabase(team,'DT')
+    overallMLB = pullFromDatabase(team,'MLB','1')
+    overallROLB = pullFromDatabase(team,'ROLB','1')
+    overallLOLB = pullFromDatabase(team,'LOLB', '1')
+    overallRE = pullFromDatabase(team,'RE', '1')
+    overallLE = pullFromDatabase(team,'LE', '1')
+    overallDT = pullFromDatabase(team,'DT', '2')
     overall = overallDT + overallLE + overallLOLB + overallMLB + overallRE + overallROLB
-    print(overall/6)
     return overall/6
 def getPassDefense(team):
-    overallCB = pullFromDatabase(team, 'CB')
-    overallFS = pullFromDatabase(team,'FS')
-    overallSS = pullFromDatabase(team, 'SS')
+    overallCB = pullFromDatabase(team, 'CB', '2')
+    overallFS = pullFromDatabase(team,'FS', '1')
+    overallSS = pullFromDatabase(team, 'SS', '1')
     overall = (overallCB + overallFS + overallSS)/3
-    print (overall)
-def getStrengthOfTeam(list):
-    overall = 0;
     return overall
+def getStrengthOfTeam(Entries):
+    final = 0.0
+    for entry in Entries:
+        final += entry
+
+    
+    return final/(len(Entries))
 
 def pullFromDatabase(team, pos, amount):
     if(amount == 0):
         sqlCommand = "SELECT overall from dbo.Players where Team = '" + team + "' and Position = '" + pos + "'"
     else:
-        sqlCommand = "SELECT TOP " + amount + " overall from dbo.Players where Team = '" + team + "' and Position = '" + pos + "'"
+        sqlCommand = "SELECT TOP " + amount + " overall from dbo.Players where Team = '" + team + "' and Position = '" + pos + "' order by overall desc"
 
     pyodbc.drivers()
     conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
@@ -52,14 +57,9 @@ def pullFromDatabase(team, pos, amount):
     for row in cursor:
         final = final + row[0]
 
-    sqlCommandCount = "SELECT Count(*) from dbo.Players where Team = '" + team + "' and Position = '" + pos + "'"
-    cursor.execute(sqlCommandCount)
     for row in cursor:
         total = row[0]
-    if(amount == 0):
-        final/total
-    else:
-        final/int(amount)
-    return final
+
+    return final/float(amount)
     
 getRunningBacks("Cardinals")
