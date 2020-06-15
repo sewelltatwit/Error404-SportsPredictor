@@ -1,4 +1,5 @@
 import pyodbc;
+from Prediction import  *
 
 def pullTeamsFromDatabase(databaseName):
     
@@ -17,7 +18,7 @@ def pullTeamsFromDatabase(databaseName):
 
 
     return teamNames
-#pullTeamsFromDatabase("dbo.Schedule")
+
 
 def pullScheduleFromDatabase(databaseName, teamName):
     sqlCommand = "SELECT * from " + databaseName + " where Team = '" + teamName + "'"
@@ -31,9 +32,9 @@ def pullScheduleFromDatabase(databaseName, teamName):
     teamNames = []
     for row in cursor:
         for opp in row:
-            if(opp != teamName):
-                teamNames.append(opp)
+            #if(opp != teamName):
+                #teamNames.append(opp)
+            teamNames.append(opp)
         print(teamNames)
 
     return teamNames
-pullScheduleFromDatabase("dbo.Schedule", "Patriots")
