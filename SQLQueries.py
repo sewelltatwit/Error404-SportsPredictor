@@ -40,10 +40,8 @@ def pullFromDatabase(team, pos, amount):
 
 def CheckBaseLine(percentage, team, weekNum):
     sqlCommand = "SELECT " + weekNum + " from dbo.BaseLine where Team = '" + team + "'"
-    pyodbc.drivers()
     cursor = ExecuteQuery(sqlCommand)
     for row in cursor:
-        print(row[0])
         if(percentage[0] < percentage[1] and (row[0] == 'L')):
             print("Predicted Loss Correct!")
         elif (percentage[0] > percentage[1] and (row[0] == 'W')):
@@ -51,18 +49,44 @@ def CheckBaseLine(percentage, team, weekNum):
         else:
             print("Prediction Incorrect!")
             
+def StoreResults(teamHome, teamAway, weekNum, winner):
+    if(winner):
+        sqlCommand = "UPDATE dbo.Game SET PredictedWinner = '" + teamHome + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "' AND Week = '" + weekNum + "'"  
+    else:
+        sqlCommand = "UPDATE dbo.Game SET PredictedWinner = '" + teamAway + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "' AND Week = '" + weekNum + "'"  
 
+    SetValues(sqlCommand)
+    print('Stored results!')
+    cursor = ExecuteQuery("SELECT * from dbo.Game WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "' AND Week = '" + weekNum + "'")
+    for row in cursor:
+        print(row)
+#StoreResults('Cardinals', 'Lions', '1')
 def ExecuteQuery(sqlCommand):
     pyodbc.drivers()
-    conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
-                          'Server=localhost;'
-                          'Database=NFL_Players;'
-                          'Trusted_Connection=yes;')
     #conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
-    #                    'Server=sports-predictor.database.windows.net;'
-    #                    'Database=SportsPredictor;'
-    #                    'UID=server;'
-    #                    'PWD=SeniorProject2020;')
+    #                      'Server=localhost;'
+    #                      'Database=NFL_Players;'
+    #                      'Trusted_Connection=yes;')
+    conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
+                        'Server=sports-predictor.database.windows.net;'
+                        'Database=SportsPredictor;'
+                        'UID=server;'
+                        'PWD=SeniorProject2020;')
     cursor = conn.cursor()
     cursor.execute(sqlCommand)
     return cursor
+
+def SetValues(sqlCommand):
+    pyodbc.drivers()
+    #conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
+    #                      'Server=localhost;'
+    #                      'Database=NFL_Players;'
+    #                      'Trusted_Connection=yes;')
+    conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
+                        'Server=sports-predictor.database.windows.net;'
+                        'Database=SportsPredictor;'
+                        'UID=server;'
+                        'PWD=SeniorProject2020;')
+    cursor = conn.cursor()
+    cursor.execute(sqlCommand)
+    conn.commit()

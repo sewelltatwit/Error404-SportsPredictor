@@ -1,9 +1,14 @@
 from GetDatabaseValues import *
 def prediction(team1, team2):
     percentage = [50, 50]
+    if('@' in team2):
+        percentage[0] = percentage[0] - 2
+        percentage[1] = percentage[1] + 2
+        team2 = team2.replace('@', '')
+
     team1Strength = [getQuaterback(team1),getRunningBacks(team1), getOffensiveLine(team1), getWideRecievers(team1), getRunDefense(team1), getPassDefense(team1)]
     
-    f = getStrengthOfTeam(team1Strength)
+    strength1 = getStrengthOfTeam(team1Strength)
     
     minorRun1 = team1Strength[1]
     majorRun1 = team1Strength[2]
@@ -21,7 +26,7 @@ def prediction(team1, team2):
     #print(f)
     team2Strength = [getQuaterback(team2), getRunningBacks(team2), getOffensiveLine(team2), getWideRecievers(team2), getRunDefense(team2), getPassDefense(team2)]
         
-    g = getStrengthOfTeam(team2Strength)
+    strength2 = getStrengthOfTeam(team2Strength)
     
     minorRun2 = team2Strength[1]
     majorRun2 = team2Strength[2]
@@ -36,8 +41,10 @@ def prediction(team1, team2):
     runDefense2 = team2Strength[4]
     passDefense2 = team2Strength[5]
     avgDefense2 = (runDefense2 + passDefense2) /2
+    
+   
     #print(g)
-    percentage = CheckMatchup(f, g, percentage, abs(f-g))
+    percentage = CheckMatchup(strength1, strength2, percentage, abs(strength1-strength2))
     #RunningBacks vs Run Defense
     percentage = CheckMatchup(minorRun1, runDefense2, percentage, 1)
     percentage = CheckMatchup(runDefense1, minorRun2, percentage, 1)
@@ -64,6 +71,7 @@ def prediction(team1, team2):
     
     if percentage[0] > percentage[1]:
         print(team1 + " by " + str(round(percentage[0]-percentage[1], 2)))
+        
         return percentage
     else:
         print(team2+ " by " + str(round(percentage[1]-percentage[0], 2)))
