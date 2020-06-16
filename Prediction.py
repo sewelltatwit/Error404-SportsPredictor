@@ -61,12 +61,13 @@ def prediction(team1, team2):
     percentage = CheckMatchup(avgDefense1, avgQBR2, percentage, 2)
     for row in percentage:
         print(round(row, 2))
+    
     if percentage[0] > percentage[1]:
-        print(team1)
-        return team1
+        print(team1 + " by " + str(round(percentage[0]-percentage[1], 2)))
+        return percentage
     else:
-        print(team2)
-        return team2
+        print(team2+ " by " + str(round(percentage[1]-percentage[0], 2)))
+        return percentage
 
 
 def CheckMatchup(team1, team2, percent, difference):
@@ -78,4 +79,4 @@ def CheckMatchup(team1, team2, percent, difference):
         percent[0] = percent[0] - difference
     return percent
 
-prediction("Patriots", "Redskins")
+#prediction("Patriots", "Redskins")

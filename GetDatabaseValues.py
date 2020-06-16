@@ -1,4 +1,6 @@
 import pyodbc;
+from SQLQueries import *
+
 def getQuaterback(team):
     #get the quaterback's overall and return it
     overall = pullFromDatabase(team, 'QB', '1')
@@ -40,26 +42,3 @@ def getStrengthOfTeam(Entries):
     
     return final/(len(Entries))
 
-def pullFromDatabase(team, pos, amount):
-    if(amount == 0):
-        sqlCommand = "SELECT overall from dbo.Players where Team = '" + team + "' and Position = '" + pos + "'"
-    else:
-        sqlCommand = "SELECT TOP " + amount + " overall from dbo.Players where Team = '" + team + "' and Position = '" + pos + "' order by overall desc"
-
-    pyodbc.drivers()
-    conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
-                          'Server=localhost;'
-                          'Database=NFL_Players;'
-                          'Trusted_Connection=yes;')
-    cursor = conn.cursor()
-    cursor.execute(sqlCommand)
-    final = 0;
-    for row in cursor:
-        final = final + row[0]
-
-    for row in cursor:
-        total = row[0]
-
-    return final/float(amount)
-    
-getRunningBacks("Cardinals")
