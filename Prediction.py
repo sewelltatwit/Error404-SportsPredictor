@@ -5,6 +5,9 @@ def prediction(team1, team2):
         percentage[0] = percentage[0] - 2
         percentage[1] = percentage[1] + 2
         team2 = team2.replace('@', '')
+    else:
+        percentage[1] = percentage[1] - 2
+        percentage[0] = percentage[0] + 2
 
     team1Strength = [getQuaterback(team1),getRunningBacks(team1), getOffensiveLine(team1), getWideRecievers(team1), getRunDefense(team1), getPassDefense(team1)]
     

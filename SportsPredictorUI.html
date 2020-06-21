@@ -37,7 +37,11 @@
         <div class="column1">
           <p style="text-align:left;">
           <h2>Select Team 1</h2>
-          <select></select>
+          <select name= "server_list" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex = -1">
+            {% for x in server_list %}
+            <option value="{{ x }}" SELECTED>{{ x }}</option>
+            {% endfor %}
+          </select>
           </p>
         </div>
         <div class="column1">
@@ -48,7 +52,9 @@
         <div class="column1">
           <p style="text-align:right;">
           <h2>Select Team 2</h2>
-          <select></select>
+          <select name= "opposing_team">
+            
+          </select>
           </p>
         </div>
       </div>

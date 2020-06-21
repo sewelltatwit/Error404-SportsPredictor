@@ -11,8 +11,8 @@ def pullTeamsFromDatabase(databaseName):
 
     return teamNames
 
-def pullScheduleFromDatabase(databaseName, teamName):
-    sqlCommand = "SELECT * from " + databaseName + " where Team = '" + teamName + "'"
+def pullScheduleFromDatabase(teamName):
+    sqlCommand = "SELECT * from dbo.Schedule where Team = '" + teamName + "'"
     cursor = ExecuteQuery(sqlCommand)
     teamNames = []
     for row in cursor:
@@ -60,6 +60,7 @@ def StoreResults(teamHome, teamAway, weekNum, winner):
     cursor = ExecuteQuery("SELECT * from dbo.Game WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "' AND Week = '" + weekNum + "'")
     for row in cursor:
         print(row)
+
 #StoreResults('Cardinals', 'Lions', '1')
 def ExecuteQuery(sqlCommand):
     pyodbc.drivers()

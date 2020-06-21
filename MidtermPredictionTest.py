@@ -5,7 +5,7 @@ def main():
     print(allTeams)
     team1Chosen = input("Enter the first team: ")
     team1Chosen = (team1Chosen.lower()).capitalize()
-    teamOneSchedule = pullScheduleFromDatabase("dbo.Schedule", team1Chosen)
+    teamOneSchedule = pullScheduleFromDatabase(team1Chosen)
     print(teamOneSchedule)
     teamTwoChosen = input("Select the second team: ")
     if ('@' in teamTwoChosen):
