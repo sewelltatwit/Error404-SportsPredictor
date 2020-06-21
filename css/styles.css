@@ -1,5 +1,7 @@
 .column {
     float: left;
+    width: 400px; 
+    padding: 5px; 
   }
   
   .left, .right {
@@ -9,11 +11,6 @@
   .middle {
     width: 50%;
   }
-
-  .column1 {
-    float: left;
-    width: 50%;
-  }
   
   /* Clear floats after the columns */
   .row1:after {
@@ -21,3 +18,38 @@
     display: table;
     clear: both;
   }
+
+  body {
+    background-color: black;
+  }
+
+  .underline{
+    border-bottom: 1px dotted rgb(240, 240, 240);
+    width: 100%;
+    display: block;
+    }
+    
+  .border {
+    border-bottom: solid rgb(240, 240, 240);
+    border-right: solid rgb(240, 240, 240);
+  }
+
+  h2 {
+    color: white;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-between;
+    max-width: 400px;
+    margin: 0 auto;
+    background: #000000;
+    padding: 10px 0;
+  }
+
+  .vertical-line{
+    display: inline-block;
+    border-left: 1px solid #ccc;
+    margin: 0 10px;
+    height: 100%;
+}
