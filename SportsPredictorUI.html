@@ -41,7 +41,14 @@
         <div class="column">
           <p style="text-align:left;">
           <h2>Select Team 1</h2>
+<<<<<<< HEAD
           <select id= "Team1">
+=======
+          <select name= "server_list" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex = -1">
+            {% for x in server_list %}
+            <option value="{{ x }}" SELECTED>{{ x }}</option>
+            {% endfor %}
+>>>>>>> a11a687acdad50a48afe922e4bccb2691a13dc72
           </select>
           </p>
         </div>
@@ -53,7 +60,13 @@
         <div class="column">
           <p>
           <h2>Select Team 2</h2>
+<<<<<<< HEAD
           <select id="Team2"></select>
+=======
+          <select name= "opposing_team">
+            
+          </select>
+>>>>>>> a11a687acdad50a48afe922e4bccb2691a13dc72
           </p>
         </div>
       </div>
