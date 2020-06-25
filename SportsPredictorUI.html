@@ -27,7 +27,7 @@
   </p>
 </span>
   <div class="row">
-    <div class="column">
+    <div class="column left">
       <h2 color: white><span class="border"> AFC Teams</span></h2>
       <ul style="list-style: none; color: green;">
         <li><u>North</u></li>
@@ -37,41 +37,31 @@
       </ul>
     </div>
     <div class="column vertical-line">
-      <div class="row1">
-        <div class="column">
-          <p style="text-align:left;">
+      <div class="row">
+        <div class="column middle" style="padding-left: 10px;">
+          <p>
           <h2>Select Team 1</h2>
-<<<<<<< HEAD
-          <select id= "Team1">
-=======
-          <select name= "server_list" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex = -1">
-            {% for x in server_list %}
+          <select name= "Team1" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex = -1">
+            {% for x in Team1 %}
             <option value="{{ x }}" SELECTED>{{ x }}</option>
             {% endfor %}
 >>>>>>> a11a687acdad50a48afe922e4bccb2691a13dc72
           </select>
           </p>
-        </div>
-        <div class="column">
+       <div class="centered" style="text-align: center;">
           <label>Home</label>
           <label>Away</label>
+          </div>
         </div>
-        </div>
-        <div class="column">
+        <div class="column middle">
           <p>
           <h2>Select Team 2</h2>
-<<<<<<< HEAD
-          <select id="Team2"></select>
-=======
-          <select name= "opposing_team">
-            
-          </select>
->>>>>>> a11a687acdad50a48afe922e4bccb2691a13dc72
+          <select name="Team2"></select>
           </p>
         </div>
       </div>
     </div>
-    <div class="column">
+    <div class="column right">
       <h2><u>NFC Teams</u></h2>
       <ul style="list-style: none;">
         <li><u>North</u></li>
@@ -83,8 +73,8 @@
   </div>
   <div style="position: relative">
     <p style="position: fixed; bottom: 0; width:100%; text-align: center">
-      <button type="button">Submit</button>
-      <button type="button">Reset</button>
+      <button style="background-color:red; border-color:red; color:white"type="button">Submit</button>
+      <button style="background-color:red; border-color:red; color:white" type="button">Reset</button>
     </p>
 </div>
 </body>
