@@ -41,11 +41,11 @@
         <div class="column middle" style="padding-left: 10px;">
           <p>
           <h2>Select Team 1</h2>
-          <select name= "Team1" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex = -1">
+          <select name= "Team1" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex = 0">
+            <option></option>
             {% for x in Team1 %}
             <option value="{{ x }}" SELECTED>{{ x }}</option>
             {% endfor %}
->>>>>>> a11a687acdad50a48afe922e4bccb2691a13dc72
           </select>
           </p>
        <div class="centered" style="text-align: center;">
@@ -56,7 +56,11 @@
         <div class="column middle">
           <p>
           <h2>Select Team 2</h2>
-          <select name="Team2"></select>
+          <select name= "Team2" method="POST" action="{{ url_for('populateTeamTwo') }}" onfocus="this.selectedIndex = -1">
+            {% for x in Team2 %}
+            <option value="{{ x }}" SELECTED>{{ x }}</option>
+            {% endfor %}
+          </select>
           </p>
         </div>
       </div>
