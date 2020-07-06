@@ -72,3 +72,38 @@ label {
   -webkit-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
 }
+
+.vertical{
+  display: table-cell;
+  vertical-align: middle;
+  height: 50px;
+}
+
+.arrow {
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid green;
+  padding-bottom: 2em;
+}
+
+p {
+  color: red;
+ }
+
+.bottom{
+  position: absolute;
+  bottom: 10px;
+  width: 50%;
+}
+
+select {
+    height: 40px;
+  }
+
+.inline {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
