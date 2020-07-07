@@ -96,16 +96,15 @@ label {
 .vertical {
     display: table-cell;
     vertical-align: middle;
-    height: 50px;
+    padding-top: 100px;
 }
 
 .arrow {
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid green;
-    padding-bottom: 2em;
+    border: solid green;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-bottom: -5px;
 }
 
 p {
@@ -116,6 +115,7 @@ p {
     position: absolute;
     bottom: 10px;
     width: 50%;
+    margin-top: 10px;
 }
 
 select {

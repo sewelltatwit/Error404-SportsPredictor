@@ -36,40 +36,45 @@
             </ul>
         </div>
 
-        <div class="column middle border" style="padding-left: 10px;">
-            <p>
-                <h2>Select Team 1</h2>
-                <select name="Team1" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex =-1">
+        <div class="column middle border" style="padding-left: 10px;line-height: 2.5em;">
+            <div class="row">
+                <div class="column left">
+                    <p>
+                        <h2>Select Team 1</h2>
+                        <select name="Team1" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex =-1">
           {% for x in Team1 %}
           <option value=x SELECTED></option>
           {% endfor %}
         </select>
-            </p>
-            <center>
-                <div class="vertical" style="text-align: center; position: relative; padding-left: 10px;">
-                    <div class="arrow" style="transform: rotate(270deg);"></div>
-                    <label>Home</label>
-                    <div class="arrow" style="transform: rotate(90deg);margin: auto;"></div>
-                    <label>Away</label>
+                    </p>
                 </div>
-            </center>
-            <p>
-                <h2>Select Team 2</h2>
-                <select name="Team2" method="POST" action="{{ url_for('populateTeamTwo') }}" onfocus="this.selectedIndex = -1">
+                <div class="column middle">
+                    <center>
+                        <div class="vertical" style="text-align: center; position: relative; padding-left: 10px;">
+                            <div class="arrow" style="transform: rotate(135deg);"></div>
+                            <div><label>Home</label></div>
+                            <div class="arrow" style="transform: rotate(-45deg);"></div>
+                            <div><label>Away</label></div>
+                        </div>
+                        <p class="bottom">
+                            <script src="sports_predictor.js"></script>
+                            <p id="result" style="display: none;">
+                                Team ___ Wins<br> ~score~</p>
+                            <button style="background-color:red; border-color:red; color:white" type="button" onclick="displayText()">Submit</button>
+                            <button style="background-color:red; border-color:red; color:white" type="button" onclick="clear()">Reset</button>
+                        </p>
+                    </center>
+                </div>
+                <div class="column right" style="padding-right: 10px;">
+                    <p>
+                        <h2>Select Team 2</h2>
+                        <select name="Team2" method="POST" action="{{ url_for('populateTeamTwo') }}" onfocus="this.selectedIndex = -1">
                     {% for x in Team2 %}
-                    <option value="{{ x }}" SELECTED>{{ x }}</option>
+                    <option value="{{ x }}" SELECTED>{{ x }} </option>
                     {% endfor %} </select>
-            </p>
-            <center>
-                <p class="bottom">
-                    <script src="sports_predictor.js"></script>
-                    <p id="result" style="display: none;">
-                        Team ___ Wins<br> ~score~</p>
-                    <button style="background-color:red; border-color:red; color:white" type="button" onclick="displayText()">Submit</button>
-                    <button style="background-color:red; border-color:red; color:white" type="button" onclick="clear()">Reset</button>
-                </p>
-            </center>
-
+                    </p>
+                </div>
+            </div>
 
         </div>
         <div class="column  right">
