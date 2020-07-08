@@ -19,7 +19,6 @@ def pullScheduleFromDatabase(teamName):
         for opp in row:
             if(opp != teamName):
                 teamNames.append(opp)
-            #teamNames.append(opp)
     return teamNames
 
 def pullFromDatabase(team, pos, amount):
