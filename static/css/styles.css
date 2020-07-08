@@ -31,13 +31,8 @@
 }
 
 body {
-<<<<<<< HEAD:static/css/styles.css
   background-color: darkgray;
   }
-=======
-    background-color: black;
-}
->>>>>>> c3becaa095ac7f305d5fd42f0b2820e2a9b25dc2:css/styles.css
 
 .underline {
     border-bottom: 1px dotted rgb(240, 240, 240);
