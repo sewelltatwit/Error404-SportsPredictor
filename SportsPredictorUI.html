@@ -11,124 +11,25 @@
 
     <link rel="stylesheet" href="css/styles.css?v=1.0">
 
-<<<<<<< HEAD
-  <link rel="stylesheet" href="static/css/styles.css?v=1.0">
-  <style>
-    h1 { color: #ffffff; }
-  </style>
+    <link rel="stylesheet" href="static/css/styles.css?v=1.0">
+    <style>
+        h1 {
+            color: #ffffff;
+        }
+    </style>
 </head>
 
 <body>
-  <script src="SQLQueries.py"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous">
-  </script>
-  <span class="underline">
+    <script src="SQLQueries.py"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    </script>
+    <span class="underline">
   <h1>Sports Predictor</h1>
   <p style="text-align:right;">
   <button style="background-color:red; border-color:red; color:white" type="button">Baseball</button>
   <button style="background-color:purple; border-color:purple; color:white" type="button">Hockey</button>
   <button style="background-color:blue; border-color:blue; color:white" type="button">Basketball</button>
   <button style="background-color:green; border-color:green; color:white" type="button">Football</button>
-  </span>
-  </p>
-</span>
-  <div class="row">
-    <div class="column left">
-      <h2 color: white><span class="border"> AFC Teams</span></h2>
-      <ul style="list-style: none; color: green;">
-        <li><u>North</u></li>
-        <li><u>South</u></li>
-        <li><u>East</u></li>
-        <li><u>West</u></li>
-      </ul>
-    </div>
-    <div class="column vertical-line">
-      <div class="row">
-        <div class="column middle inline" style="padding-left: 10px;">
-          <p>
-          <h2>Select Team 1</h2>
-          <select id="ddlFirstTeam" method="GET" action="{{ url_for('populateTeamOne') }}">
-            <option value="First Null" selected="selected"> </option>
-            {% for x in Team1 %}
-            <option value= {{ x }}>{{ x }}</option>
-            {% endfor %}
-          </select>
-          </p>
-       <center><div class="vertical" style="text-align: center; position: relative; padding-left: 10px;">
-         <div class="arrow" style="transform: rotate(270deg);"></div>
-           <label>Home</label>
-           <div class="arrow" style="transform: rotate(90deg);margin: auto;"></div>
-              <label>Away</label>
-          </div></center>
-        </div>
-        <div class="column middle" style="padding-left: 10px;">
-          <p>
-          <h2>Select Team 2</h2>
-          <select id="ddlTeamTwo">
-            <option value="Second Null" selected="selected"> </option>
-          </select>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="column right">
-      <h2><u>NFC Teams</u></h2>
-      <ul style="list-style: none;">
-        <li><u>North</u></li>
-        <li><u>South</u></li>
-        <li><u>East</u></li>
-        <li><u>West</u></li>
-      </ul>
-    </div>
-  </div>
-  <div class="middle centered bottom" style="position: relative">
-    <center> <p class="bottom">
-      <script src="sports_predictor.js"></script>
-       <p id="txtResult" style="display: none;">
-        Team ___ Wins<br> ~score~</p>
-      <button 
-      style="background-color:red; border-color:red; color:white"
-      id="btnSubmit" type="button" onclick="displayText()">Submit</button>
-      <button 
-      style="background-color:red; border-color:red; color:white" 
-      id="btnReset" type="button" onclick="clear()">Reset</button>
-    </p></center>
-</div>
-<script>
-  $( document ).ready(function() {
-    $(document).change(function(){
-          var firstTeam = $(this).find("option:selected");
-          var txtFirst = firstTeam.text();
-  
-          // Make Ajax Request and expect JSON-encoded data
-          $.getJSON(
-            '/getSchedule' + '/' + txtFirst,
-            function(data) {
-              // Add new items
-
-              $.each(data, function(key, val) {
-                var option_item = '<option value="' + val + '">' + val + '</option>';
-                console.log(option_item);
-                $('#ddlTeamTwo').append(new Option(val, val));
-              });
-            });
-        });
-    });
-</script>
-=======
-</head>
-
-<body>
-    <script src="SQLQueries.py"></script>
-    <span class="underline">
-    <h1>Sports Predictor</h1>
-    <p style="text-align:right;">
-      <button style="background-color:red; border-color:red; color:white" type="button">Baseball</button>
-      <button style="background-color:purple; border-color:purple; color:white" type="button">Hockey</button>
-      <button style="background-color:blue; border-color:blue; color:white" type="button">Basketball</button>
-      <button style="background-color:green; border-color:green; color:white" type="button">Football</button>
   </span>
     </p>
     </span>
@@ -142,21 +43,22 @@
                 <li><u>West</u></li>
             </ul>
         </div>
-
         <div class="column middle border" style="padding-left: 10px;line-height: 2.5em;">
             <div class="row">
                 <div class="column left">
                     <p>
                         <h2>Select Team 1</h2>
-                        <select name="Team1" method="GET" action="{{ url_for('populateTeamOne') }}" onfocus="this.selectedIndex =-1">
-          {% for x in Team1 %}
-          <option value=x SELECTED></option>
-          {% endfor %}
-        </select>
+                        <select id="ddlFirstTeam" method="GET" action="{{ url_for('populateTeamOne') }}">
+            <option value="First Null" selected="selected"> </option>
+            {% for x in Team1 %}
+            <option value= {{ x }}>{{ x }}</option>
+            {% endfor %}
+          </select>
                     </p>
                 </div>
                 <div class="column middle">
                     <center>
+
                         <div class="vertical" style="text-align: center; position: relative; padding-left: 10px;">
                             <div class="arrow" style="transform: rotate(135deg);"></div>
                             <div><label>Home</label></div>
@@ -165,26 +67,27 @@
                         </div>
                         <p class="bottom">
                             <script src="sports_predictor.js"></script>
-                            <p id="result" style="display: none;">
+                            <p id="txtResult" style="display: none;">
                                 Team ___ Wins<br> ~score~</p>
-                            <button style="background-color:red; border-color:red; color:white" type="button" onclick="displayText()">Submit</button>
-                            <button style="background-color:red; border-color:red; color:white" type="button" onclick="clear()">Reset</button>
+                            <button style="background-color:red; border-color:red; color:white" id="btnSubmit" type="button" onclick="displayText()">Submit</button>
+                            <button style="background-color:red; border-color:red; color:white" id="btnReset" type="button" onclick="clear()">Reset</button>
                         </p>
                     </center>
                 </div>
+
                 <div class="column right" style="padding-right: 10px;">
                     <p>
                         <h2>Select Team 2</h2>
-                        <select name="Team2" method="POST" action="{{ url_for('populateTeamTwo') }}" onfocus="this.selectedIndex = -1">
-                    {% for x in Team2 %}
-                    <option value="{{ x }}" SELECTED>{{ x }} </option>
-                    {% endfor %} </select>
+                        <select id="ddlTeamTwo">
+            <option value="Second Null" selected="selected"> </option>
+          </select>
                     </p>
                 </div>
             </div>
 
         </div>
-        <div class="column  right">
+
+        <div class="column right">
             <h2 color: white><span class="border-left">NFC Teams</span></h2>
             <ul style="list-style: none; color: green;">
                 <li><u>North</u></li>
@@ -192,10 +95,30 @@
                 <li><u>East</u></li>
                 <li><u>West</u></li>
             </ul>
-
         </div>
+    </div>
 
->>>>>>> c3becaa095ac7f305d5fd42f0b2820e2a9b25dc2
+    <script>
+        $(document).ready(function() {
+            $(document).change(function() {
+                var firstTeam = $(this).find("option:selected");
+                var txtFirst = firstTeam.text();
+
+                // Make Ajax Request and expect JSON-encoded data
+                $.getJSON(
+                    '/getSchedule' + '/' + txtFirst,
+                    function(data) {
+                        // Add new items
+
+                        $.each(data, function(key, val) {
+                            var option_item = '<option value="' + val + '">' + val + '</option>';
+                            console.log(option_item);
+                            $('#ddlTeamTwo').append(new Option(val, val));
+                        });
+                    });
+            });
+        });
+    </script>
 </body>
 
 </html>
