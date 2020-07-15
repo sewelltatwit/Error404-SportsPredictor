@@ -29,6 +29,13 @@
 }
 
 body {
+<<<<<<< HEAD
+  background-color: darkgray;
+  }
+=======
+    background-color: grey;
+}
+>>>>>>> origin/master
 
 .underline {
     border-bottom: 1px dotted rgb(240, 240, 240);
