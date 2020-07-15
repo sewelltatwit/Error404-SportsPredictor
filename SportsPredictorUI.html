@@ -67,11 +67,11 @@
             </div>
             <p class="bottom">
               <script src="sports_predictor.js"></script>
-            <p id="btnSubmit" style="display: none;">
+            <p id="result" style="display: none;">
               Team ___ Wins<br> ~score~</p>
             <button style="background-color:red; border-color:red; color:white" type="button"
               onclick="displayText()">Submit</button>
-            <button id="btnReset" style="background-color:red; border-color:red; color:white" type="button"
+            <button style="background-color:red; border-color:red; color:white" type="button"
               onclick="clear()">Reset</button>
             </p>
           </center>
@@ -107,9 +107,9 @@
         $.getJSON(
           '/getSchedule' + '/' + txtFirst,
           function (data) {
-            
+
             // Add new items
-            
+
             $.each(data, function (key, val) {
               var option_item = '<option value="' + val + '">' + val + '</option>';
               console.log(option_item);
