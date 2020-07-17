@@ -4,11 +4,21 @@ def prediction(team1, team2):
     if('@' in team2):
         percentage[0] = percentage[0] - 2
         percentage[1] = percentage[1] + 2
+        isHome = False
         team2 = team2.replace('@', '')
     else:
+        isHome = True
         percentage[1] = percentage[1] - 2
         percentage[0] = percentage[0] + 2
-
+    
+    if(isHome):
+        temp = CheckResults(team1, team2)
+        if(temp != None):
+            return (temp + " Wins")
+    else:
+        temp = CheckResults(team2, team1)
+        if(temp != None):
+            return (temp + " Wins")
     team1Strength = [getQuaterback(team1),getRunningBacks(team1), getOffensiveLine(team1), getWideRecievers(team1), getRunDefense(team1), getPassDefense(team1)]
     
     strength1 = getStrengthOfTeam(team1Strength)
@@ -69,16 +79,21 @@ def prediction(team1, team2):
     #Quaterbacks, Wider Recievers, Offensive Line vs Run and Pass Defense
     percentage = CheckMatchup(avgQBR1, avgDefense2, percentage, 2)
     percentage = CheckMatchup(avgDefense1, avgQBR2, percentage, 2)
-    for row in percentage:
-        print(round(row, 2))
-    
+
     if percentage[0] > percentage[1]:
-        print(team1 + " by " + str(round(percentage[0]-percentage[1], 2)))
-        
-        return percentage
+        if(isHome):
+            StoreResults(team1, team2, team1)
+        else:
+            StoreResults(team2, team1, team1)
+
+        return (team1 + " Wins")
     else:
-        print(team2+ " by " + str(round(percentage[1]-percentage[0], 2)))
-        return percentage
+        if(isHome):
+            StoreResults(team1, team2, team2)
+        else:
+            StoreResults(team2, team1, team2)
+
+        return (team2 + " Wins")
 
 
 def CheckMatchup(team1, team2, percent, difference):
@@ -90,4 +105,4 @@ def CheckMatchup(team1, team2, percent, difference):
         percent[0] = percent[0] - difference
     return percent
 
-#prediction("Patriots", "Redskins")
+prediction("Bears", "Packers")
