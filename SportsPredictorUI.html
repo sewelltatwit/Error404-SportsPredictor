@@ -270,7 +270,9 @@
                 $.getJSON(
                     '/finalResult' + '/' + teamOne + '/' + teamTwo,
                     function (data) {
-                    $("#txtResult").text(data);
+                    $("#txtResult").text(data[0]);
+                    $("#txtResult").append(document.createElement('br'));
+                    $("#txtResult").append(data[1]);
                     
                 });
             });

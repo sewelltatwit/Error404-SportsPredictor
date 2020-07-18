@@ -48,17 +48,12 @@ def CheckBaseLine(percentage, team, weekNum):
         else:
             print("Prediction Incorrect!")
             
-def StoreResults(teamHome, teamAway, winner):
-    if(winner):
-        sqlCommand = "UPDATE dbo.Game SET PredictedWinner = '" + teamHome + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
-    else:
-        sqlCommand = "UPDATE dbo.Game SET PredictedWinner = '" + teamAway + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
-
+def StoreResults(teamHome, teamAway, winner, prediction):
+    sqlCommand = "UPDATE dbo.Game SET " + prediction + " = '" + winner + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
     SetValues(sqlCommand)
     
-def CheckResults(teamHome, teamAway):
-    sqlCommand = "Select PredictedWinner FROM dbo.Game where HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
-    
+def CheckResults(teamHome, teamAway, predicted):
+    sqlCommand = "Select " + predicted + " FROM dbo.Game where HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
     cursor = ExecuteQuery(sqlCommand)
     result = ''
     for row in cursor:
