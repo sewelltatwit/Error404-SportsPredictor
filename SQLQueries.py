@@ -48,19 +48,21 @@ def CheckBaseLine(percentage, team, weekNum):
         else:
             print("Prediction Incorrect!")
             
-def StoreResults(teamHome, teamAway, weekNum, winner):
-    if(winner):
-        sqlCommand = "UPDATE dbo.Game SET PredictedWinner = '" + teamHome + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "' AND Week = '" + weekNum + "'"  
-    else:
-        sqlCommand = "UPDATE dbo.Game SET PredictedWinner = '" + teamAway + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "' AND Week = '" + weekNum + "'"  
-
+def StoreResults(teamHome, teamAway, winner, prediction):
+    sqlCommand = "UPDATE dbo.Game SET " + prediction + " = '" + winner + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
     SetValues(sqlCommand)
-    print('Stored results!')
-    cursor = ExecuteQuery("SELECT * from dbo.Game WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "' AND Week = '" + weekNum + "'")
+    
+def CheckResults(teamHome, teamAway, predicted):
+    sqlCommand = "Select " + predicted + " FROM dbo.Game where HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
+    cursor = ExecuteQuery(sqlCommand)
+    result = ''
     for row in cursor:
-        print(row)
+        result = row[0]
+    #print(result) 
+    return result
 
-#StoreResults('Cardinals', 'Lions', '1')
+
+
 def ExecuteQuery(sqlCommand):
     pyodbc.drivers()
     #conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
@@ -90,3 +92,5 @@ def SetValues(sqlCommand):
     cursor = conn.cursor()
     cursor.execute(sqlCommand)
     conn.commit()
+    
+#CheckResults("Bears", "Packers")

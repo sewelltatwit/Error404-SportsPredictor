@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 from SQLQueries import *
+from Prediction import *
 app = Flask(__name__, template_folder='/Users/daobr/Documents/VSCodePy/Error404-SportsPredictor')
 app.debug = True
 app.config['SESSION_COOKIE_SECURE'] = False
@@ -13,7 +14,9 @@ def populateTeamOne():
 def getSchedule(TeamOneValue):
     return jsonify(pullScheduleFromDatabase(TeamOneValue))
 
-        
-        
+@app.route('/finalResult/<TeamOne>/<TeamTwo>')       
+def storeResult(TeamOne, TeamTwo):
+    return jsonify(prediction(TeamOne, TeamTwo))
+
 if __name__ == "__main__":
     app.run()

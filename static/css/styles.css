@@ -29,9 +29,8 @@
 }
 
 body {
-    background-color: grey;
+background-color: darkgray;
 }
-
 .underline {
     border-bottom: 1px dotted rgb(240, 240, 240);
     width: 100%;
