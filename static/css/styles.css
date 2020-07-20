@@ -61,6 +61,7 @@ h1 {
 h2 {
     color: white;
     margin-left: 10px;
+    white-space: nowrap;
 }
 
 label {
@@ -110,8 +111,8 @@ p {
 }
 
 .bottom {
-    position: absolute;
-    bottom: 0px;
+    position: fixed;
+    bottom: 10px;
 }
 
 select {
