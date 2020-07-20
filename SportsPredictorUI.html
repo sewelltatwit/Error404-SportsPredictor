@@ -147,7 +147,8 @@
                             <script src="{{ url_for('static', filename="sports_predictor.js") }}"></script>
                             <p id="txtResult"></p>
                             <button style="background-color:red; border-color:red; color:white" id="btnSubmit" type="button" onclick="displayText()">Submit</button>
-                            <button style="background-color:red; border-color:red; color:white" id="btnReset" type="button" onclick="clear()">Reset</button>
+                            <button style="background-color:red; border-color:red; color:white" id="btnReset" type="button" onclick="Reset();">Reset</button>
+                            
                         </p>
                     </center>
                 </div>
@@ -267,6 +268,8 @@
             $("#btnSubmit").click(function(){
                 var teamOne = $("#ddlFirstTeam option:selected").text();
                 var teamTwo = $("#ddlTeamTwo option:selected").text();
+                $("#ddlFirstTeam").prop('disabled', true);
+                $("#ddlTeamTwo").prop('disabled', true);
                 $.getJSON(
                     '/finalResult' + '/' + teamOne + '/' + teamTwo,
                     function (data) {
@@ -277,6 +280,16 @@
                 });
             });
         });
+    </script>
+    <script type="text/javascript">
+        function Reset() {
+            document.getElementById("ddlFirstTeam").disabled = false;
+            document.getElementById("ddlTeamTwo").disabled = false;
+            $('#ddlTeamTwo').find("option").remove();
+            document.getElementById("txtResult").innerHTML='';
+            var dropDown = document.getElementById("ddlFirstTeam");
+            dropDown.selectedIndex = 0;
+        }
     </script>
   <script>
     $(document).ready(function () {

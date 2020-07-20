@@ -2,6 +2,8 @@ from GetDatabaseValues import *
 def prediction(team1, team2):
     percentage = [50, 50]
     score = [0, 0]
+    if(team2 == "BYE"):
+        return ["Can not display result for bye week",""]
     if('@' in team2):
         percentage[0] = percentage[0] - 2
         percentage[1] = percentage[1] + 2

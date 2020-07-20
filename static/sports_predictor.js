@@ -1,19 +1,11 @@
 function displayText() {
         
-        var ddlTeamOne = document.getElementById("ddlFirstTeam");
-        var teamOne = ddlTeamOne.options(ddlTeamOne.selectedIndex).value;
-        var ddlTeamTwo = document.getElementById("ddlTeamTwo");
-        var teamTwo = ddlTeamTwo.options(ddlTeamTwo.selectedIndex).value;
-        $.getJSON(
-            '/finalResult' + '/' + teamOne + '/' + teamTwo,
-            function (data) {
-            
-            
-        });
 }
 
 function clear() {
+    $("#ddlFirstTeam").prop('disabled', false);
+    $("#ddlTeamTwo").prop('disabled', false);
     document.getElementById("btnResult").innerHTML='';
-    document.getElementById("ddlFirstTeam").selectedIndex = 1;
+    document.getElementById("ddlFirstTeam").selectedIndex = 0;
 }
 
