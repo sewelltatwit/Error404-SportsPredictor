@@ -3,18 +3,18 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <title>Sports Predictor</title>
-  <meta name="description" content="Sports Predictor">
-  <meta name="author" content="SitePoint">
+    <title>Sports Predictor</title>
+    <meta name="description" content="Sports Predictor">
+    <meta name="author" content="SitePoint">
 
-  <link rel="stylesheet" href="static/css/styles.css?v=1.0">
+    <link rel="stylesheet" href="static/css/styles.css?v=1.0">
 
     <style>
-    h1 {
-      color: #ffffff;
-    }
+        h1 {
+            color: #ffffff;
+        }
     </style>
 </head>
 
@@ -144,11 +144,11 @@
                 <div class="column middle">
                     <center>
                         <p class="bottom">
-                            <script src="{{ url_for('static', filename="sports_predictor.js") }}"></script>
+                            <script src="{{ url_for('static', filename=" sports_predictor.js ") }}"></script>
                             <p id="txtResult"></p>
                             <button style="background-color:red; border-color:red; color:white" id="btnSubmit" type="button" onclick="displayText()">Submit</button>
                             <button style="background-color:red; border-color:red; color:white" id="btnReset" type="button" onclick="Reset();">Reset</button>
-                            
+
                         </p>
                     </center>
                 </div>
@@ -264,20 +264,20 @@
         </div>
     </div>
     <script>
-        $(document).ready(function(){
-            $("#btnSubmit").click(function(){
+        $(document).ready(function() {
+            $("#btnSubmit").click(function() {
                 var teamOne = $("#ddlFirstTeam option:selected").text();
                 var teamTwo = $("#ddlTeamTwo option:selected").text();
                 $("#ddlFirstTeam").prop('disabled', true);
                 $("#ddlTeamTwo").prop('disabled', true);
                 $.getJSON(
                     '/finalResult' + '/' + teamOne + '/' + teamTwo,
-                    function (data) {
-                    $("#txtResult").text(data[0]);
-                    $("#txtResult").append(document.createElement('br'));
-                    $("#txtResult").append(data[1]);
-                    
-                });
+                    function(data) {
+                        $("#txtResult").text(data[0]);
+                        $("#txtResult").append(document.createElement('br'));
+                        $("#txtResult").append(data[1]);
+
+                    });
             });
         });
     </script>
@@ -286,30 +286,30 @@
             document.getElementById("ddlFirstTeam").disabled = false;
             document.getElementById("ddlTeamTwo").disabled = false;
             $('#ddlTeamTwo').find("option").remove();
-            document.getElementById("txtResult").innerHTML='';
+            document.getElementById("txtResult").innerHTML = '';
             var dropDown = document.getElementById("ddlFirstTeam");
             dropDown.selectedIndex = 0;
         }
     </script>
-  <script>
-    $(document).ready(function () {
-      $("#ddlFirstTeam").change(function () {
-        var firstTeam = $(this).find("option:selected");
-        var txtFirst = firstTeam.text();
-        $('#ddlTeamTwo').find("option").remove();
-        // Make Ajax Request and expect JSON-encoded data
-        $.getJSON(
-          '/getSchedule' + '/' + txtFirst,
-          function (data) {
+    <script>
+        $(document).ready(function() {
+            $("#ddlFirstTeam").change(function() {
+                var firstTeam = $(this).find("option:selected");
+                var txtFirst = firstTeam.text();
+                $('#ddlTeamTwo').find("option").remove();
+                // Make Ajax Request and expect JSON-encoded data
+                $.getJSON(
+                    '/getSchedule' + '/' + txtFirst,
+                    function(data) {
 
-            $.each(data, function (key, val) {
-              var option_item = '<option value="' + val + '">' + val + '</option>';
-              $('#ddlTeamTwo').append(new Option(val, val));
+                        $.each(data, function(key, val) {
+                            var option_item = '<option value="' + val + '">' + val + '</option>';
+                            $('#ddlTeamTwo').append(new Option(val, val));
+                        });
+                    });
             });
-          });
-      });
         });
-  </script>
+    </script>
 </body>
 
 </html>
