@@ -29,8 +29,9 @@
 }
 
 body {
-background-color: darkgray;
+    background-color: darkgray;
 }
+
 .underline {
     border-bottom: 1px dotted rgb(240, 240, 240);
     width: 100%;
@@ -110,9 +111,7 @@ p {
 
 .bottom {
     position: absolute;
-    bottom: 10px;
-    width: 50%;
-    margin-top: 10px;
+    bottom: 0px;
 }
 
 select {
@@ -126,4 +125,8 @@ ul {
 img {
     width: 150px;
     height: 35px;
+}
+
+li {
+    display: inline;
 }
