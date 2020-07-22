@@ -17,12 +17,12 @@ def prediction(team1, team2):
     if(isHome):
         storedWinner = CheckResults(team1, team2, "PredictedWinner")
         if(storedWinner != None):
-            winner = [(storedWinner + " Win"), CheckResults(team1, team2, "PredictedScore")]
+            winner = [storedWinner, CheckResults(team1, team2, "PredictedScore")]
             return winner
     else:
         storedWinner = CheckResults(team2, team1, "PredictedWinner")
         if(storedWinner != None):
-            winner = [(storedWinner + " Win"), CheckResults(team2, team1, "PredictedScore")]
+            winner = [storedWinner, CheckResults(team2, team1, "PredictedScore")]
             return winner
     team1Strength = [getQuaterback(team1),getRunningBacks(team1), getOffensiveLine(team1), getWideRecievers(team1), getRunDefense(team1), getPassDefense(team1)]
     
@@ -93,23 +93,23 @@ def prediction(team1, team2):
     finalResult = str(score[0]) + "-" + str(score[1])
     if percentage[0] > percentage[1]:
         if(isHome):
-            StoreResults(team1, team2, team1, "PredictedWinner")
+            StoreResults(team1, team2, team1 +" by " + str(round(percentage[0]-percentage[1], 2)) + "%", "PredictedWinner")
             StoreResults(team1, team2, finalResult, "PredictedScore")
         else:
-            StoreResults(team2, team1, team1, "PredictedWinner")
+            StoreResults(team2, team1, team1 +" by " + str(round(percentage[0]-percentage[1], 2)) + "%", "PredictedWinner")
             StoreResults(team2, team1, finalResult, "PredictedScore")
 
 
-        return [(team1 + " Wins"), finalResult]
+        return [team1 +" by " + str(round(percentage[0]-percentage[1], 2)) + "%", finalResult]
     else:
         if(isHome):
-            StoreResults(team1, team2, team2, "PredictedWinner")
+            StoreResults(team1, team2, team2 +" by " + str(round(percentage[1]-percentage[0], 2)) + "%", "PredictedWinner")
             StoreResults(team1, team2, finalResult, "PredictedScore")
         else:
-            StoreResults(team2, team1, team2, "PredictedWinner")
+            StoreResults(team2, team1, team2 +" by " + str(round(percentage[1]-percentage[0], 2)) + "%", "PredictedWinner")
             StoreResults(team2, team1, finalResult, "PredictedScore")
 
-        return [(team2 + " Wins"), finalResult]
+        return [team2 +" by " + str(round(percentage[1]-percentage[0], 2)) + "%", finalResult]
 
 def UpdateScore(team1, team2, score):
     if(team1 > team2 and (team1-team2) < 5):
