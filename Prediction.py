@@ -93,23 +93,23 @@ def prediction(team1, team2):
     finalResult = str(score[0]) + "-" + str(score[1])
     if percentage[0] > percentage[1]:
         if(isHome):
-            StoreResults(team1, team2, team1 +" by " + str(round(percentage[0]-percentage[1], 2)) + "%", "PredictedWinner")
+            StoreResults(team1, team2, team1 +" has a " + str(round(percentage[0], 2)) + "% chance to win", "PredictedWinner")
             StoreResults(team1, team2, finalResult, "PredictedScore")
         else:
-            StoreResults(team2, team1, team1 +" by " + str(round(percentage[0]-percentage[1], 2)) + "%", "PredictedWinner")
+            StoreResults(team2, team1, team1 +" has a " + str(round(percentage[0], 2)) + "% chance to win", "PredictedWinner")
             StoreResults(team2, team1, finalResult, "PredictedScore")
 
 
-        return [team1 +" by " + str(round(percentage[0]-percentage[1], 2)) + "%", finalResult]
+        return [team1 + " has a " + str(round(percentage[0], 2)) + "% chance to win", finalResult]
     else:
         if(isHome):
-            StoreResults(team1, team2, team2 +" by " + str(round(percentage[1]-percentage[0], 2)) + "%", "PredictedWinner")
+            StoreResults(team1, team2, team2 +" has a " + str(round(percentage[1], 2)) + "% chance to win", "PredictedWinner")
             StoreResults(team1, team2, finalResult, "PredictedScore")
         else:
-            StoreResults(team2, team1, team2 +" by " + str(round(percentage[1]-percentage[0], 2)) + "%", "PredictedWinner")
+            StoreResults(team2, team1, team2 +" has a " + str(round(percentage[1], 2)) + "% chance to win", "PredictedWinner")
             StoreResults(team2, team1, finalResult, "PredictedScore")
 
-        return [team2 +" by " + str(round(percentage[1]-percentage[0], 2)) + "%", finalResult]
+        return [team2 +" has a "+ str(round(percentage[1], 2)) + "% chance to win", finalResult]
 
 def UpdateScore(team1, team2, score):
     if(team1 > team2 and (team1-team2) < 5):
