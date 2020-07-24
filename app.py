@@ -18,5 +18,6 @@ def getSchedule(TeamOneValue):
 def storeResult(TeamOne, TeamTwo):
     return jsonify(prediction(TeamOne, TeamTwo))
 
-if __name__ == "__main__":
+@app.before_request
+def check_for_init():
     app.run()
