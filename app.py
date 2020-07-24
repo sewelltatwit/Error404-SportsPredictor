@@ -20,4 +20,5 @@ def storeResult(TeamOne, TeamTwo):
 
 @app.before_request
 def check_for_init():
+    populateTeamOne()
     app.run()
