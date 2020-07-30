@@ -37,17 +37,31 @@ def pullFromDatabase(team, pos, amount):
 
     return final/float(amount)
 
-def CheckBaseLine(percentage, team, weekNum):
-    sqlCommand = "SELECT " + weekNum + " from dbo.BaseLine where Team = '" + team + "'"
+def CheckBaseLine(home, away, results):
+    sqlCommand = "SELECT Winner, Score from dbo.BaselineCheck where Home = '" + home + "' and Away = '" + away + "'"
     cursor = ExecuteQuery(sqlCommand)
+    actualResult = ''
     for row in cursor:
-        if(percentage[0] < percentage[1] and (row[0] == 'L')):
-            print("Predicted Loss Correct!")
-        elif (percentage[0] > percentage[1] and (row[0] == 'W')):
-            print("Predicted Win Correct!")
+        if(results == row[0]):
+            actualResult = "Predicted Winner Correctly! Actual Score: " + row[1]
         else:
-            print("Prediction Incorrect!")
-            
+            actualResult = "Predicted Winner Incorrectly! Actual Score: " + row[1]
+    StoreBaseline(home, away, actualResult)
+    return actualResult
+
+def CheckBaseMessage(home, away):
+    sqlCommand = "SELECT Message from dbo.BaselineCheck where Home = '" + home + "' and Away = '" + away + "'"
+    cursor = ExecuteQuery(sqlCommand)
+    message = ''
+    for row in cursor:
+        message = row[0]
+    return message
+
+def StoreBaseline(home, away, results):
+    sqlCommand = "UPDATE dbo.BaselineCheck SET Message = '" + results + "' WHERE Home = '" + home + "' And Away = '" + away + "'"
+    SetValues(sqlCommand)
+
+
 def StoreResults(teamHome, teamAway, winner, prediction):
     sqlCommand = "UPDATE dbo.Game SET " + prediction + " = '" + winner + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
     SetValues(sqlCommand)
@@ -58,17 +72,12 @@ def CheckResults(teamHome, teamAway, predicted):
     result = ''
     for row in cursor:
         result = row[0]
-    #print(result) 
     return result
 
 
 
 def ExecuteQuery(sqlCommand):
     pyodbc.drivers()
-    #conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
-    #                      'Server=localhost;'
-    #                      'Database=NFL_Players;'
-    #                      'Trusted_Connection=yes;')
     conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
                         'Server=sports-predictor.database.windows.net;'
                         'Database=SportsPredictor;'
@@ -80,10 +89,6 @@ def ExecuteQuery(sqlCommand):
 
 def SetValues(sqlCommand):
     pyodbc.drivers()
-    #conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
-    #                      'Server=localhost;'
-    #                      'Database=NFL_Players;'
-    #                      'Trusted_Connection=yes;')
     conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
                         'Server=sports-predictor.database.windows.net;'
                         'Database=SportsPredictor;'
@@ -93,4 +98,3 @@ def SetValues(sqlCommand):
     cursor.execute(sqlCommand)
     conn.commit()
     
-#CheckResults("Bears", "Packers")

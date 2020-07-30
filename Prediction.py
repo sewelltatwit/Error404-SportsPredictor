@@ -16,13 +16,17 @@ def prediction(team1, team2):
     winner = []
     if(isHome):
         storedWinner = CheckResults(team1, team2, "PredictedWinner")
+        storedScore = CheckResults(team1, team2, "PredictedScore")
+        storedMessage = CheckBaseMessage(team1, team2)
         if(storedWinner != None):
-            winner = [storedWinner, CheckResults(team1, team2, "PredictedScore")]
+            winner = [storedWinner + "\t Score: " + storedScore, storedMessage]
             return winner
     else:
         storedWinner = CheckResults(team2, team1, "PredictedWinner")
+        storedScore = CheckResults(team2, team1, "PredictedScore")
+        storedMessage = CheckBaseMessage(team2, team1)
         if(storedWinner != None):
-            winner = [storedWinner, CheckResults(team2, team1, "PredictedScore")]
+            winner = [storedWinner + "\t Score: "+ storedScore, storedMessage]
             return winner
     team1Strength = [getQuaterback(team1),getRunningBacks(team1), getOffensiveLine(team1), getWideRecievers(team1), getRunDefense(team1), getPassDefense(team1)]
     
@@ -64,52 +68,66 @@ def prediction(team1, team2):
 
     percentage = CheckMatchup(strength1, strength2, percentage, abs(strength1-strength2))
     score = UpdateScore(strength1, strength2, score)
+    
     #RunningBacks vs Run Defense
     percentage = CheckMatchup(minorRun1, runDefense2, percentage, 1)
     percentage = CheckMatchup(runDefense1, minorRun2, percentage, 1)
+    
     #Offensive Line vs Run Defense
     percentage = CheckMatchup(majorRun1, runDefense2, percentage, 2)
     percentage = CheckMatchup(runDefense1, majorRun2, percentage, 2)
+    
     #RunningBacks and Offensive Line vs Run Defense
     percentage = CheckMatchup(avgRun1, runDefense2, percentage, 1.5)
     percentage = CheckMatchup(runDefense1, avgRun2, percentage, 1.5)
     score = UpdateScore(avgRun1, runDefense2, score)
     score = UpdateScore(runDefense1, avgRun2, score)
+    
     #Wide Recievers vs Pass Defense
     percentage = CheckMatchup(minorPass1, passDefense2, percentage, 1)
     percentage = CheckMatchup(passDefense1, minorPass2, percentage, 1)
+    
     #Quaterbacks vs Pass Defense
     percentage = CheckMatchup(majorPass1, passDefense2, percentage, 1.6)
     percentage = CheckMatchup(passDefense1, majorPass2, percentage, 1.6)
+    
     #Quaterbacks and Wide Recievers vs Pass Defense
     percentage = CheckMatchup(avgPass1, passDefense2, percentage, 1.3)
     percentage = CheckMatchup(passDefense1, avgPass2, percentage, 1.3)
+    
     #Quaterbacks, Wider Recievers, Offensive Line vs Run and Pass Defense
     percentage = CheckMatchup(avgQBR1, avgDefense2, percentage, 2)
     percentage = CheckMatchup(avgDefense1, avgQBR2, percentage, 2)
     score = UpdateScore(avgQBR1, avgDefense2, score)
     score = UpdateScore(avgDefense1, avgQBR2, score)
 
-    finalResult = str(score[0]) + "-" + str(score[1])
+    if(isHome):
+        finalResult = str(score[0]) + "-" + str(score[1])
+    else:
+        finalResult = str(score[1]) + "-" + str(score[0])
     if percentage[0] > percentage[1]:
         if(isHome):
-            StoreResults(team1, team2, team1 +" has a " + str(round(percentage[0], 2)) + "% chance to win", "PredictedWinner")
+            StoreResults(team1, team2, team1 +" has a " + str(round(percentage[0], 2)) + "% chance to win.", "PredictedWinner")
             StoreResults(team1, team2, finalResult, "PredictedScore")
+            baselineMessage = CheckBaseLine(team1, team2, team1)
         else:
-            StoreResults(team2, team1, team1 +" has a " + str(round(percentage[0], 2)) + "% chance to win", "PredictedWinner")
+            StoreResults(team2, team1, team1 +" has a " + str(round(percentage[0], 2)) + "% chance to win.", "PredictedWinner")
             StoreResults(team2, team1, finalResult, "PredictedScore")
+            baselineMessage = CheckBaseLine(team2, team1, team1)
 
-
-        return [team1 + " has a " + str(round(percentage[0], 2)) + "% chance to win", finalResult]
+        print([team1 + " has a " + str(round(percentage[0], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage])
+        return [team1 + " has a " + str(round(percentage[0], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage]
     else:
         if(isHome):
-            StoreResults(team1, team2, team2 +" has a " + str(round(percentage[1], 2)) + "% chance to win", "PredictedWinner")
+            StoreResults(team1, team2, team2 +" has a " + str(round(percentage[1], 2)) + "% chance to win.", "PredictedWinner")
             StoreResults(team1, team2, finalResult, "PredictedScore")
+            baselineMessage = CheckBaseLine(team1, team2, team2)
         else:
-            StoreResults(team2, team1, team2 +" has a " + str(round(percentage[1], 2)) + "% chance to win", "PredictedWinner")
+            StoreResults(team2, team1, team2 +" has a " + str(round(percentage[1], 2)) + "% chance to win.", "PredictedWinner")
             StoreResults(team2, team1, finalResult, "PredictedScore")
-
-        return [team2 +" has a "+ str(round(percentage[1], 2)) + "% chance to win", finalResult]
+            baselineMessage = CheckBaseLine(team2, team1, team2)
+        print([team2 +" has a "+ str(round(percentage[1], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage])
+        return [team2 +" has a "+ str(round(percentage[1], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage]
 
 def UpdateScore(team1, team2, score):
     if(team1 > team2 and (team1-team2) < 5):
@@ -130,5 +148,3 @@ def CheckMatchup(team1, team2, percent, difference):
         percent[1] = percent[1] + difference
         percent[0] = percent[0] - difference
     return percent
-
-#prediction("Vikings", "Bears")
