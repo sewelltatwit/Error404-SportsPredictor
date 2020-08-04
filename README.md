@@ -10,11 +10,11 @@ Our project is different from other sports prediction apps because other apps ha
 
 
 ## Features
-1.Drop down lists of teams
-2.External linking 
-3.Eventually an option to switch sports
-4.Displays the prediction results only after user submits the request
-5.Reset / clear button 
+1. Drop down lists of teams
+2. External linking 
+3. Eventually an option to switch sports
+4. Displays the prediction results only after user submits the request
+5. Reset / clear button 
 
 
 ## Getting Started
