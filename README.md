@@ -29,14 +29,6 @@ Our project is different from other sports prediction apps because other apps ha
 2. Select the ip address that appreared on the terminal
 
 ## Demo video
-
-Upload your demo video to youtube and put a link here. Basically, the video content is very much like the quick live demo of your product with the followings:
-1. Introduction
-2. How to run the app
-3. Quick walkthrough of all the features of your app one by one
-
-Please make it short and interesting!
-
 https://www.youtube.com/watch?v=EVk1Jjn0BoQ
 
 ## Contributors
