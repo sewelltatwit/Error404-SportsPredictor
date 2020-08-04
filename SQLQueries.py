@@ -1,16 +1,15 @@
 import pyodbc;
 
+#Query to select the teams in the league from the database
 def pullTeamsFromDatabase(databaseName):
-    
     sqlCommand = "SELECT Team from " + databaseName
-
     cursor = ExecuteQuery(sqlCommand)
     teamNames = []
     for row in cursor:
         teamNames.append(row[0])
-
     return teamNames
 
+#Query to return a list of teams that the "teamName" plays in 2019 season
 def pullScheduleFromDatabase(teamName):
     sqlCommand = "SELECT * from dbo.Schedule where Team = '" + teamName + "'"
     cursor = ExecuteQuery(sqlCommand)
@@ -21,6 +20,7 @@ def pullScheduleFromDatabase(teamName):
                 teamNames.append(opp)
     return teamNames
 
+#Query to return average players at a certain position and team
 def pullFromDatabase(team, pos, amount):
     if(amount == 0):
         sqlCommand = "SELECT overall from dbo.Players where Team = '" + team + "' and Position = '" + pos + "'"
@@ -31,12 +31,11 @@ def pullFromDatabase(team, pos, amount):
     final = 0;
     for row in cursor:
         final = final + row[0]
-
     for row in cursor:
         total = row[0]
-
     return final/float(amount)
 
+#Query to check the final results of actual game vs predicted game
 def CheckBaseLine(home, away, results):
     sqlCommand = "SELECT Winner, Score from dbo.BaselineCheck where Home = '" + home + "' and Away = '" + away + "'"
     cursor = ExecuteQuery(sqlCommand)
@@ -49,6 +48,7 @@ def CheckBaseLine(home, away, results):
     StoreBaseline(home, away, actualResult)
     return actualResult
 
+#Query to return message stored in BaselineCheck
 def CheckBaseMessage(home, away):
     sqlCommand = "SELECT Message from dbo.BaselineCheck where Home = '" + home + "' and Away = '" + away + "'"
     cursor = ExecuteQuery(sqlCommand)
@@ -57,15 +57,17 @@ def CheckBaseMessage(home, away):
         message = row[0]
     return message
 
+#Query to store information in the Baseline for reference later
 def StoreBaseline(home, away, results):
     sqlCommand = "UPDATE dbo.BaselineCheck SET Message = '" + results + "' WHERE Home = '" + home + "' And Away = '" + away + "'"
     SetValues(sqlCommand)
 
-
+#Query to store results of matchup
 def StoreResults(teamHome, teamAway, winner, prediction):
     sqlCommand = "UPDATE dbo.Game SET " + prediction + " = '" + winner + "' WHERE HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
     SetValues(sqlCommand)
-    
+
+#Query to check the stored results of matchup
 def CheckResults(teamHome, teamAway, predicted):
     sqlCommand = "Select " + predicted + " FROM dbo.Game where HomeTeam = '" + teamHome + "' AND AwayTeam = '" + teamAway + "'"
     cursor = ExecuteQuery(sqlCommand)
@@ -74,8 +76,7 @@ def CheckResults(teamHome, teamAway, predicted):
         result = row[0]
     return result
 
-
-
+#Command to connect to the database and run a query
 def ExecuteQuery(sqlCommand):
     pyodbc.drivers()
     conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'
@@ -87,6 +88,7 @@ def ExecuteQuery(sqlCommand):
     cursor.execute(sqlCommand)
     return cursor
 
+#Command to connect to the database and set a value
 def SetValues(sqlCommand):
     pyodbc.drivers()
     conn = pyodbc.connect('Driver={ODBC Driver 17 for SQL Server};'

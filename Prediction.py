@@ -1,9 +1,15 @@
 from GetDatabaseValues import *
 def prediction(team1, team2):
+    #Inital score and percentage of matchup
     percentage = [50, 50]
     score = [0, 0]
+    winner = []
+    #If the second team is the bye week, then team one does not play anyone
+    #Will return message
     if(team2 == "BYE"):
         return ["Can not display result for bye week",""]
+    
+    #Gains home field advantage in percentage to win
     if('@' in team2):
         percentage[0] = percentage[0] - 2
         percentage[1] = percentage[1] + 2
@@ -13,7 +19,9 @@ def prediction(team1, team2):
         isHome = True
         percentage[1] = percentage[1] - 2
         percentage[0] = percentage[0] + 2
-    winner = []
+        
+    #Check to see if the results have been stored
+    #If stored, then pulls results instead of running prediction
     if(isHome):
         storedWinner = CheckResults(team1, team2, "PredictedWinner")
         storedScore = CheckResults(team1, team2, "PredictedScore")
@@ -28,44 +36,36 @@ def prediction(team1, team2):
         if(storedWinner != None):
             winner = [storedWinner + "\t Score: "+ storedScore, storedMessage]
             return winner
+    
+    #Overalls of each major part for team one
     team1Strength = [getQuaterback(team1),getRunningBacks(team1), getOffensiveLine(team1), getWideRecievers(team1), getRunDefense(team1), getPassDefense(team1)]
-    
     strength1 = getStrengthOfTeam(team1Strength)
-    
     minorRun1 = team1Strength[1]
     majorRun1 = team1Strength[2]
     avgRun1 = (minorRun1 + majorRun1) /2
-    
     minorPass1 = team1Strength[3]
     majorPass1 = team1Strength[0]
     avgPass1 = (minorPass1 + majorPass1) /2
-    
     avgQBR1 = (minorPass1 + majorPass1 + majorRun1) /3
-    
     runDefense1 = team1Strength[4]
     passDefense1 = team1Strength[5]
     avgDefense1 = (runDefense1 + passDefense1) /2
-    #print(f)
-    team2Strength = [getQuaterback(team2), getRunningBacks(team2), getOffensiveLine(team2), getWideRecievers(team2), getRunDefense(team2), getPassDefense(team2)]
-        
+
+    #Overalls of each major part for team two
+    team2Strength = [getQuaterback(team2), getRunningBacks(team2), getOffensiveLine(team2), getWideRecievers(team2), getRunDefense(team2), getPassDefense(team2)]     
     strength2 = getStrengthOfTeam(team2Strength)
-    
     minorRun2 = team2Strength[1]
     majorRun2 = team2Strength[2]
     avgRun2 = (minorRun1 + majorRun2) /2
-    
     minorPass2 = team2Strength[3]
     majorPass2 = team2Strength[0]
     avgPass2 = (minorPass2 + majorPass2) /2
-    
     avgQBR2 = (minorPass2 + majorPass2 + majorRun2) /3
-    
     runDefense2 = team2Strength[4]
     passDefense2 = team2Strength[5]
     avgDefense2 = (runDefense2 + passDefense2) /2
-    
    
-
+    #Checks overall team strength to each other
     percentage = CheckMatchup(strength1, strength2, percentage, abs(strength1-strength2))
     score = UpdateScore(strength1, strength2, score)
     
@@ -101,10 +101,13 @@ def prediction(team1, team2):
     score = UpdateScore(avgQBR1, avgDefense2, score)
     score = UpdateScore(avgDefense1, avgQBR2, score)
 
+    #Organizes the score to show hometeam first
     if(isHome):
         finalResult = str(score[0]) + "-" + str(score[1])
     else:
         finalResult = str(score[1]) + "-" + str(score[0])
+        
+    #Stores and displays the results
     if percentage[0] > percentage[1]:
         if(isHome):
             StoreResults(team1, team2, team1 +" has a " + str(round(percentage[0], 2)) + "% chance to win.", "PredictedWinner")
@@ -115,7 +118,6 @@ def prediction(team1, team2):
             StoreResults(team2, team1, finalResult, "PredictedScore")
             baselineMessage = CheckBaseLine(team2, team1, team1)
 
-        print([team1 + " has a " + str(round(percentage[0], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage])
         return [team1 + " has a " + str(round(percentage[0], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage]
     else:
         if(isHome):
@@ -126,9 +128,10 @@ def prediction(team1, team2):
             StoreResults(team2, team1, team2 +" has a " + str(round(percentage[1], 2)) + "% chance to win.", "PredictedWinner")
             StoreResults(team2, team1, finalResult, "PredictedScore")
             baselineMessage = CheckBaseLine(team2, team1, team2)
-        print([team2 +" has a "+ str(round(percentage[1], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage])
+        
         return [team2 +" has a "+ str(round(percentage[1], 2)) + "% chance to win. \t Score: "+ finalResult, baselineMessage]
 
+#Will update the score based on who has higher overall
 def UpdateScore(team1, team2, score):
     if(team1 > team2 and (team1-team2) < 5):
         score[0] += 3
@@ -140,6 +143,7 @@ def UpdateScore(team1, team2, score):
         score[1] += 7
     return score
 
+#Will update the percentage based on who has higher overall
 def CheckMatchup(team1, team2, percent, difference):
     if(team1 > team2):
         percent[1] = percent[1] - difference
