@@ -11,11 +11,6 @@
 
     <link rel="stylesheet" href="static/css/styles.css?v=1.0">
 
-    <style>
-        h1 {
-            color: #ffffff;
-        }
-    </style>
 </head>
 
 <body>
@@ -24,17 +19,17 @@
     <span class="underline">
     <h1>Sports Predictor</h1>
     <p style="text-align:right;">
-      <button style="background-color:red; border-color:red; color:white" type="button">Baseball</button>
-      <button style="background-color:purple; border-color:purple; color:white" type="button">Hockey</button>
-      <button style="background-color:blue; border-color:blue; color:white" type="button">Basketball</button>
-      <button style="background-color:green; border-color:green; color:white" type="button">Football</button>
+      <button style="background-color:red; border-color:red" type="button">Baseball</button>
+      <button style="background-color:purple; border-color:purple" type="button">Hockey</button>
+      <button style="background-color:blue; border-color:blue" type="button">Basketball</button>
+      <button style="background-color:green; border-color:green" type="button">Football</button>
   </span>
     </p>
     </span>
     <div class="row">
         <div class="column left border-right">
-            <h2 color: white><span class="border-right"> AFC Teams</span></h2>
-            <ul style="list-style: none; color: green;">
+            <h2><span class="border-right"> AFC Teams</span></h2>
+            <ul style="color: green;">
                 <li><u>North</u></li>
                 <ul>
                     <li>
@@ -146,8 +141,8 @@
                         <p class="bottom">
                             <script src="{{ url_for('static', filename=" sports_predictor.js ") }}"></script>
                             <p id="txtResult"></p>
-                            <button style="background-color:red; border-color:red; color:white" id="btnSubmit" type="button" onclick="displayText()">Submit</button>
-                            <button style="background-color:red; border-color:red; color:white" id="btnReset" type="button" onclick="Reset();">Reset</button>
+                            <button style="background-color:red; border-color:red" id="btnSubmit" type="button" onclick="displayText()">Submit</button>
+                            <button style="background-color:red; border-color:red" id="btnReset" type="button" onclick="Reset();">Reset</button>
 
                         </p>
                     </center>
@@ -161,13 +156,14 @@
           </select>
                     </p>
                 </div>
+
             </div>
 
         </div>
 
         <div class="column right border-left">
-            <h2 color: white><span class="border-left">NFC Teams</span></h2>
-            <ul style="list-style: none; color: green;">
+            <h2><span class="border-left">NFC Teams</span></h2>
+            <ul style="color: green;">
                 <li><u>North</u></li>
                 <ul>
                     <li>

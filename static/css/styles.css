@@ -54,20 +54,6 @@ body {
     border-left: solid rgb(240, 240, 240);
 }
 
-h1 {
-    color: #ffffff;
-}
-
-h2 {
-    color: white;
-    margin-left: 10px;
-    white-space: nowrap;
-}
-
-label {
-    color: green;
-}
-
 .content {
     display: flex;
     justify-content: space-between;
@@ -106,13 +92,23 @@ label {
     margin-bottom: -5px;
 }
 
-p {
-    color: red;
-}
-
 .bottom {
     position: fixed;
     bottom: 10px;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+h2 {
+    color: white;
+    margin-left: 10px;
+    white-space: nowrap;
+}
+
+label {
+    color: green;
 }
 
 select {
@@ -130,4 +126,12 @@ img {
 
 li {
     display: inline;
+}
+
+p {
+    color: red;
+}
+
+button {
+    color: white;
 }
