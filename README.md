@@ -10,31 +10,26 @@ Our project is different from other sports prediction apps because other apps ha
 
 
 ## Features
-1.Drop down lists of teams
-2.External linking 
-3.Eventually an option to switch sports
-4.Displays the prediction results only after user submits the request
-5.Reset / clear button 
+1. Drop down lists of teams
+2. External linking 
+3. Eventually an option to switch sports
+4. Displays the prediction results only after user submits the request
+5. Reset / clear button 
 
 
 ## Getting Started
 ### Installation and Setup
-List all the steps on how to install and setup your project
+1. Download the zip file from github
+2. Run the commands on Visual Studios
+    - pip install flask
+    - pip install pyodbc
+3. Change the python version to 64 bit using Command Pallette
 ### Run
-List all the steps on how to run your project
+1. Select app.py and run the python file in the terminal
+2. Select the ip address that appreared on the terminal
 
 ## Demo video
-
-Upload your demo video to youtube and put a link here. Basically, the video content is very much like the quick live demo of your product with the followings:
-1. Introduction
-2. How to run the app
-3. Quick walkthrough of all the features of your app one by one
-
-Please make it short and interesting!
-
-Sample: https://www.youtube.com/watch?v=Pr-JMqTkdEM
-
-How to record your screen: https://www.techradar.com/how-to/record-your-screen
+https://www.youtube.com/watch?v=EVk1Jjn0BoQ&t=5s
 
 ## Contributors
 
